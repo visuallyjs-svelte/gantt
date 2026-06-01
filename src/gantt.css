@@ -1,0 +1,328 @@
+:root {
+  --vjs-gantt-color-draw-tools: #21840e;
+  --vjs-gantt-color-day-stripe-alt:#f9f9f9;
+  --vjs-gantt-color-decoration-border:#999999;
+
+  --vjs-gantt-draw-handle-size:4px;
+}
+
+/* ----------- main chart styles -------------- */
+
+.vjs-node {
+  z-index:2;
+}
+
+.vjs-gantt-main {
+  display:flex;
+  outline:1px solid;
+  height:800px;
+}
+
+.vjs-gantt-canvas {
+    flex-grow:1;
+}
+
+.vjs-gantt-controls {
+  padding:0.25rem;
+  display:flex;
+}
+
+.vjs-gantt-controls button {
+  margin:0.5rem;
+  font-size:14px;
+    padding:0.5rem;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    border:1px solid transparent;
+}
+
+.vjs-gantt-controls button:hover {
+    border:1px solid royalblue;
+    border-radius:5px;
+}
+
+/* --------- timeline headers ------------------------ */
+
+.vjs-gantt-timeline {
+  display:flex;
+  flex-direction: column;
+  z-index: 51;
+  background-color: white;
+  opacity: 0.95;
+}
+
+.vjs-gantt-timeline-row {
+  display:flex;
+  align-items: center;
+}
+
+.vjs-gantt-timeline-entry {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-weight:bold;
+  overflow: hidden;
+  border:1px solid var(--vjs-gantt-color-decoration-border);
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.vjs-gantt-day-name {
+  color:gray;
+}
+
+
+/* ------------ Task labels -------------------------- */
+
+.vjs-gantt-task-labels {
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  z-index: 50;
+  opacity: 0.95;
+  padding: 0 0.5rem;
+  border-right: 2px solid var(--vjs-gantt-color-decoration-border);
+}
+
+.vjs-gantt-task-label {
+
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+
+}
+
+[data-vjs-type='taskGroup'] {
+  font-weight:bold;
+}
+
+/* ----------- task bars ----------------------------- */
+
+/* styles for the task bars, group + individual task */
+.vjs-gantt-task, .vjs-gantt-task-group, .vjs-gantt-milestone {
+  display: flex;
+  align-items: center;
+  z-index:2;
+  opacity: 0.9;
+    border-radius: 5px;
+}
+
+.vjs-gantt-milestone {
+  background-color:white;
+}
+
+.vjs-gantt-milestone-body {
+  width:100%;
+  height:100%;
+  transform: rotate(45deg);
+}
+
+/* the number showing the current progress, may be hidden */
+.vjs-gantt-progress-value {
+  position:absolute;
+  right:0.5rem;
+  top:50%;
+  transform: translate(0, -50%);
+  z-index:3;
+}
+
+/* append '%' to the progress value */
+.vjs-gantt-progress-value::after {
+  content:"%";
+}
+
+/* the gauge provides the visual key of the progress */
+.vjs-gantt-progress-gauge {
+  z-index:2;
+  background-color: white;
+  opacity:0.6;
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+}
+
+.vjs-gantt-delete, .vjs-gantt-connect {
+  position: absolute;
+  right: -20px;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+  width: 0.6rem;
+  height: 0.6rem;
+  color: white;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  font-weight: bold;
+}
+
+.vjs-gantt-delete {
+  top: 25%;
+  background-color: red;
+}
+
+.vjs-gantt-connect {
+  top: 75%;
+  background-color: forestgreen;
+}
+
+
+
+.vjs-selected-element {
+  border: none;
+}
+
+.vjs-selected-element .vjs-gantt-delete, .vjs-selected-element .vjs-gantt-connect {
+  display:flex;
+}
+
+/*
+* Hide progress value and gauge if the `data-vjs-show-progress` attribute is set to false (Can be set on each task bar
+ * individually or on the chart as a whole.
+ */
+[data-vjs-show-progress='false'] .vjs-gantt-progress-value, [data-vjs-show-progress='false'] .vjs-gantt-progress-gauge {
+  display:none;
+}
+
+
+/* ----------------------- drawing tools --------------------- */
+
+
+div.vjs-draw-skeleton {
+  outline: 1px solid var(--vjs-gantt-color-draw-tools);
+  outline-offset: var(--vjs-gantt-draw-handle-size);
+}
+
+.vjs-draw-handle {
+  background-color: var(--vjs-gantt-color-draw-tools);
+  cursor:pointer;
+}
+
+.vjs-draw-handle-tr {
+  right:-4px;
+  top:-4px;
+}
+
+.vjs-draw-handle-br {
+  right:-4px;
+  bottom:-4px;
+}
+
+.vjs-draw-handle-tl {
+  left:-4px;
+  top:-4px;
+}
+
+.vjs-draw-handle-bl {
+  left:-4px;
+  bottom:-4px;
+}
+
+
+/* ------- stripes -------- */
+.vjs-gantt-day-stripes {
+  display:flex;
+  z-index:0;
+  pointer-events: none;
+}
+
+.vjs-gantt-day-stripe {
+  background-color:white;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.vjs-gantt-day-stripe-alt {
+  background-color:var(--vjs-gantt-color-day-stripe-alt);
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+/* ------ current date indicator line ------------- */
+
+.vjs-gantt-right-now {
+  width:1px;
+  border-left:2px dotted darkcyan;
+  z-index:5;
+}
+
+/* -------------- edges ---------------- */
+.vjs-gantt .vjs-connector {
+  z-index:1;
+  stroke:var(--vjs-gantt-color-draw-tools);
+}
+
+.vjs-gantt .vjs-connector path {
+  stroke:var(--vjs-gantt-color-draw-tools);
+}
+
+/* -------------- inspector ------------------- */
+
+.vjs-gantt-inspector {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem;
+}
+
+.vjs-gantt-inspector input {
+  height:40px;
+  margin:0.25rem;
+}
+
+.vjs-gantt-inspector [type='range'] {
+  flex-grow: 1;
+}
+
+.vjs-gantt-progress-value-label:after {
+  content:"%";
+}
+
+.vjs-inspector-active .vjs-gantt-inspector {
+  display:block;
+}
+
+/* --------------------- dialogs ------------------------------------ */
+.vjs-gantt-dialog {
+  display:flex;
+  flex-direction: column;
+}
+
+.vjs-gantt-dialog select {
+  height:40px;
+  margin:0.25rem;
+}
+
+/* ---------- dependency dragging ----------------- */
+[data-vjs-enabled='false'] {
+  opacity:0.7;
+}
+
+.vjs-drag-hover {
+  background-color: darkmagenta !important;
+}
+
+.vjs-gantt-milestone.vjs-drag-hover {
+  background-color: white !important;
+}
+
+.vjs-drag-hover .vjs-gantt-milestone-body {
+  background-color: darkmagenta !important;
+}
+
+/* --- button bar ----- */
+
+.vjs-demo-gantt-buttons {
+  display:flex;
+  align-items:center;
+  padding:0.25rem;
+}
+
+.vjs-demo-gantt-buttons > button {
+  margin:0.25rem;
+}
