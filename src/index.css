@@ -1,3 +1,5 @@
+@import "@visuallyjs/browser-ui/css/visuallyjs.css";
+
 body {
     margin: 0;
     font-family: sans-serif;

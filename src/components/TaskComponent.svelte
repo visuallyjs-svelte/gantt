@@ -1,11 +1,8 @@
 <script lang="ts">
-import { getContext } from 'svelte'
 import type { SvelteWrapperProps } from "@visuallyjs/browser-ui-svelte"
-import type { Gantt } from '../defs'
-import { BAR_HEIGHT } from '../constants'
+import { BAR_HEIGHT } from '../gantt/constants'
 
 let { data, vertex }: SvelteWrapperProps = $props()
-const gantt = getContext<Gantt>('gantt')
 </script>
 
 <div class="vjs-gantt-task"
@@ -18,6 +15,5 @@ const gantt = getContext<Gantt>('gantt')
      data-vjs-show-progress="true">
     <div class="vjs-gantt-progress-value">{data.progress}</div>
     <div class="vjs-gantt-progress-gauge" style:width="{data.progress}%"></div>
-    <div class="vjs-gantt-delete" onclick={() => gantt.removeTask(vertex.id)}>×</div>
     <div class="vjs-gantt-connect" data-vjs-source="true">+</div>
 </div>
