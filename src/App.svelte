@@ -7,6 +7,7 @@ import GanttProvider from "./GanttProvider.svelte"
 import './gantt.css'
 import GanttLabels from "./decorators/GanttLabels.svelte";
 import GanttHeaders from "./decorators/GanttHeaders.svelte";
+import GanttBodyDecorator from "./decorators/GanttBody.svelte"
 </script>
 
 <div class="vjs-gantt-main">
@@ -19,6 +20,7 @@ import GanttHeaders from "./decorators/GanttHeaders.svelte";
 				<GanttHeaders/>
 				<GanttChart/>
 			</div>
+			<GanttBodyDecorator/>
         </div>
 		</GanttProvider>
     </SurfaceProvider>

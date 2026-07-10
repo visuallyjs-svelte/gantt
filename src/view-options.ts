@@ -3,9 +3,9 @@ import { TYPE_TASK, TYPE_TASK_GROUP, TYPE_MILESTONE } from "./gantt/constants"
 import TaskComponent from "./components/TaskComponent.svelte"
 import TaskGroupComponent from "./components/TaskGroupComponent.svelte"
 import MilestoneComponent from "./components/MilestoneComponent.svelte"
-import {confirmTaskDeletion} from "./gantt/util";
+import {Gantt} from "./gantt/gantt.ts";
 
-export function generateView(removeTask:(id:string)=> void) {
+export function generateView(gantt:Gantt) {
     return {
         nodes: {
             selectable: {
@@ -42,9 +42,7 @@ export function generateView(removeTask:(id:string)=> void) {
                 ],
                 events: {
                     [EVENT_TAP]: (e: EdgeEventCallbackPayload) => {
-                        confirmTaskDeletion("Delete", `Delete dependency?`, () => {
-                            e.model.removeEdge(e.obj)
-                        })
+                        gantt.maybeDeleteDependency(e.obj)
                     }
                 }
             }

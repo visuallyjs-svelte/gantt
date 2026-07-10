@@ -1,10 +1,8 @@
 <script lang="ts">
-    import { EVENT_DATA_UPDATED } from "@visuallyjs/browser-ui"
-    import type { Gantt, TimelineHeaderDayEntryValue, TimelineHeaderEntry } from "../gantt/defs.ts";
+    import type { TimelineHeaderDayEntryValue, TimelineHeaderEntry } from "../gantt/defs.ts";
     import { getGanttContext } from "../gantt-context.svelte.ts";
     import { STEP_WIDTH } from "../gantt/constants.ts";
     import { useSurface, useZoom } from "@visuallyjs/browser-ui-svelte";
-	import configureHeaders from "../gantt/headers"
 
     let headers = $state<Array<TimelineHeaderEntry>>([])
     let dayRange = $state<number>(0)
@@ -18,32 +16,16 @@
     $effect(() => {
         if (gantt) {
             repaint();
-            // Listen for model updates to repaint
-            // In the original React code, this was bound once.
-            // Using a model.bind call.
-            // Note: In GanttChart.svelte, the model is _surface.current.model.
-            // We should ensure we don't double bind if this effect re-runs, 
-            // but gantt instance typically doesn't change once initialized.
-            const model = gantt.model
-            if (model) {
-                model.bind(EVENT_DATA_UPDATED, repaint);
-                return () => {
-                    model.unbind(EVENT_DATA_UPDATED, repaint);
-                }
-            }
+            gantt.bind("update", repaint)
+			return () => gantt.unbind("update", repaint)
         }
     });
 
 
-
     function repaint() {
         if (gantt != null) {
-
-            const dhs = configureHeaders(gantt)
-
-            dayRange = dhs.dayRange
-            gantt.headerSize = dhs.headerSize
-            headers = dhs.headers
+            dayRange = gantt.dayRange
+			headers = gantt.headers
         }
     }
 </script>

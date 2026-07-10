@@ -1,5 +1,5 @@
 import { getContext, setContext } from "svelte";
-import type { Gantt } from "./gantt/defs";
+import {Gantt} from "./gantt/gantt.ts";
 
 // We use a class or a simple object with a $state property
 // to ensure the reference update is tracked across the context.

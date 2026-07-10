@@ -13,5 +13,4 @@ let { data, vertex }: SvelteWrapperProps = $props()
      style:background-color={data.color}
      data-vjs-resizable="false"
      data-vjs-not-draggable="true">
-    <div class="vjs-gantt-connect" data-vjs-source="true">+</div>
 </div>

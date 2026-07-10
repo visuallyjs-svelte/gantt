@@ -1,4 +1,5 @@
-import {Node, ColorGenerator, BrowserUIModel} from "@visuallyjs/browser-ui"
+import {ColorGenerator} from "@visuallyjs/browser-ui"
+import {Gantt} from "./gantt";
 
 export interface Task {
     id:string
@@ -24,6 +25,7 @@ export interface InternalTask extends ParsedTask {
     dayRange:number
     size:number
     left:number
+    index:number
 }
 
 export interface SerializedTask extends Task {
@@ -38,35 +40,6 @@ export type TimelineHeaderEntryValue = {start:number, end:number, label:string, 
 export type TimelineHeaderDayEntryValue = TimelineHeaderEntryValue & {day:string}
 
 export type TimelineHeaderEntry = {values:Array<TimelineHeaderEntryValue>, id:string}
-
-export interface Gantt {
-  assignColor():string
-  relayoutTasks():void
-  barHeight:number
-  minValue:() => number
-  maxValue:() => number
-  rowHeight:number
-  addTask:(d:ParsedTask) => any
-  dayNameFormat:"short"|"narrow"
-  showDays:boolean
-  showWeekOfYear:boolean
-  showMonthNames:boolean
-  showQuarter:boolean
-  showDayName:boolean
-  showDayNumber:boolean
-  exportToConsole:()=>void
-  model:BrowserUIModel
-  headerSize:number
-  toggleCollapse:(taskId:string) => void
-  removeTask:(taskId:string, noNeedToConfirm?:boolean) => void
-    listTopLevelTasks():Array<Node>
-    listSubtasks(entry:Node):Array<Node>
-
-    getTask(id:string):Node|null
-    zoomIn:() => void
-    zoomOut:() => void
-    getZoom():number
-}
 
 export interface GanttOptions {
     timeline?:{
@@ -95,4 +68,12 @@ export interface GanttExporterParameters {
     gantt:Gantt
 }
 
-export type LabelEntry = {id:string, name:string, indent:number, type:string, collapsed?:boolean}
+export type LabelEntry = {id:string, name:string, indent:number, type:string, collapsed?:boolean, y:number}
+
+export type DayEntry = {
+    clazz: string,
+    left: number,
+    size: number,
+    height: number,
+    id: number
+}

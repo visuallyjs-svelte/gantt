@@ -1,4 +1,4 @@
-import {TYPE_TASK} from "./constants.ts";
+import {TYPE_TASK} from "./constants";
 
 export class Dialogs {
     container: HTMLElement | null = null

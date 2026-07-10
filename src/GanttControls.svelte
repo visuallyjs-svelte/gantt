@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {addNewTask, addNewTaskGroup, addNewMilestone, exportToConsole} from './gantt/util'
+
 import {getGanttContext} from "./gantt-context.svelte";
 import {useSurface} from "@visuallyjs/browser-ui-svelte";
 
@@ -8,16 +8,16 @@ const gantt = getGanttContext()
 </script>
 
 <div class="vjs-gantt-controls">
-    <button onclick={() => addNewTask(gantt.instance)} title="New Task">
+    <button onclick={() => gantt.instance?.addNewTask()} title="New Task">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
 	</button>
-    <button onclick={() => addNewTaskGroup(gantt.instance)} title="New Task Group">
+    <button onclick={() => gantt.instance?.addNewTaskGroup()} title="New Task Group">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" x2="12" y1="11" y2="17"/><line x1="9" x2="15" y1="14" y2="14"/></svg>
 	</button>
-    <button onclick={() => addNewMilestone(gantt.instance)} title="New Milestone">
+    <button onclick={() => gantt.instance?.addNewMilestone()} title="New Milestone">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 12l10 10 10-10L12 2Z"/><circle cx="12" cy="12" r="1"/></svg>
 	</button>
-    <button onclick={() => exportToConsole(gantt.instance, surface.current.model)} title="Export to Console">
+    <button onclick={() => gantt.instance?.exportToConsole()} title="Export to Console">
 		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 9 12 4 7"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
 	</button>
     <button onclick={() => surface.current.model?.undo()} title="Undo">

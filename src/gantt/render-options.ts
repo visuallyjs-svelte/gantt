@@ -9,8 +9,9 @@ import {
     PointXY, Size, Node, SurfaceOptions
 } from "@visuallyjs/browser-ui"
 import {millisecondsToDays, pixelsToMilliseconds} from "./util"
+import {Gantt} from "./gantt";
 
-export function createRenderOptions(minValue:() => number, recalcTask:(task:Node) => void):SurfaceOptions {
+export function createRenderOptions(gantt:Gantt):SurfaceOptions {
     return {
         activeFiltering:true,
 
@@ -44,7 +45,7 @@ export function createRenderOptions(minValue:() => number, recalcTask:(task:Node
                     widthAttribute:"size",
                     // @ts-ignore
                     payloadGenerator:(node:Node, payload:InternalTask) => {
-                        const newStart = minValue() + pixelsToMilliseconds(payload.left)
+                        const newStart = gantt.minValue() + pixelsToMilliseconds(payload.left)
                         const newEnd = newStart + pixelsToMilliseconds(payload.size)
                         return {
                             start:newStart,
@@ -53,10 +54,10 @@ export function createRenderOptions(minValue:() => number, recalcTask:(task:Node
                         }
                     },
                     onEdit:(task:Node, surface:Surface) => {
-                        recalcTask(task)
+                        gantt.recalc(task)
                         surface.relayout()
                     },
-                   resizeY:false,
+                    resizeY:false,
                     resizeMethod:"borders"
                 }
             }
