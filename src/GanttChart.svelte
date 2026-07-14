@@ -1,6 +1,6 @@
 <script lang="ts">
 import {SurfaceComponent, useSurface, newInstance} from '@visuallyjs/browser-ui-svelte'
-import type { BrowserUISvelteModel, RefObject } from '@visuallyjs/browser-ui-svelte'
+import type { RefObject } from '@visuallyjs/browser-ui-svelte'
 import {
     registerParser, registerExporter
 } from "@visuallyjs/browser-ui"
