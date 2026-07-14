@@ -11,8 +11,7 @@
 	let headerSize = $state(0)
     let entries:Array<LabelEntry> = $state([])
 
-	const surface = useSurface()
-	const zoom = useZoom(surface)
+	const zoom = useZoom()
 
     function repaint() {
         if (gantt.instance != null) {

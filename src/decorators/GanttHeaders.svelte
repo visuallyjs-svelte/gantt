@@ -10,8 +10,7 @@
     let ganttContext = getGanttContext();
     let gantt = $derived(ganttContext.instance);
 
-    const surface = useSurface()
-    const zoom = useZoom(surface)
+    const zoom = useZoom()
 
     $effect(() => {
         if (gantt) {
