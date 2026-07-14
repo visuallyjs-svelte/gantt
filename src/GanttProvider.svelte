@@ -1,7 +1,7 @@
 <script lang="ts">
-
-
+	
     import { setGanttContext } from "./gantt-context.svelte";
+    import {SurfaceProvider} from "@visuallyjs/browser-ui-svelte";
 
     let { children } = $props();
 
@@ -10,4 +10,6 @@
 
 </script>
 
+<SurfaceProvider>
 {@render children()}
+</SurfaceProvider>

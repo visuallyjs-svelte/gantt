@@ -1,5 +1,4 @@
 <script lang="ts">
-import { SurfaceProvider } from '@visuallyjs/browser-ui-svelte'
 import GanttChart from './GanttChart.svelte'
 import GanttControls from './GanttControls.svelte'
 import GanttProvider from "./GanttProvider.svelte"
@@ -11,8 +10,7 @@ import GanttBodyDecorator from "./decorators/GanttBody.svelte"
 </script>
 
 <div class="vjs-gantt-main">
-    <SurfaceProvider>
-		<GanttProvider>
+	<GanttProvider>
         <GanttControls/>
         <div class="vjs-gantt-body">
 			<GanttLabels/>
@@ -22,6 +20,5 @@ import GanttBodyDecorator from "./decorators/GanttBody.svelte"
 			</div>
 			<GanttBodyDecorator/>
         </div>
-		</GanttProvider>
-    </SurfaceProvider>
+	</GanttProvider>
 </div>
